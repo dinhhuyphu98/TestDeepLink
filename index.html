@@ -12,7 +12,7 @@
         function tryOpenApp() {
             var now = Date.now();
             // Attempt to open the deep link
-            window.location = appUrl;
+            tryOpenApp();
 
             // Check if the app was opened successfully after a delay
             setTimeout(function() {
@@ -28,13 +28,7 @@
         function showAppStoreMessage() {
             document.getElementById('appStoreMessage').style.display = 'block';
         }
-
-        // Function to handle button click event
-        function handleButtonClick() {
-            tryOpenApp();
-            document.getElementById('openAppMessage').style.display = 'none';
-        }
-
+        
         // Function to handle app store redirect button
         function redirectToAppStore() {
             window.location.href = appStoreUrl;
@@ -52,10 +46,6 @@
     </style>
 </head>
 <body>
-    <div id="openAppMessage">
-        <p>Do you want to open the app?</p>
-        <button onclick="handleButtonClick()">OK</button>
-    </div>
     <div id="appStoreMessage">
         <p>It seems like the app didn't open. Do you want to go to the App Store?</p>
         <button onclick="redirectToAppStore()">Go to App Store</button>
