@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open App</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // URL của deeplink mà bạn muốn mở
+        var appUrl = "iapdeeplink://";
+
+        // URL của App Store mà bạn muốn dẫn người dùng đến nếu không mở được app
+        var appStoreUrl = "https://apps.apple.com/app/6473403510";
+
+        // Mở ứng dụng bằng cách đặt src của iframe
+        var iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        iframe.src = appUrl;
+        document.body.appendChild(iframe);
+
+        // Nếu không mở được ứng dụng sau 2 giây, dẫn người dùng đến App Store
+        setTimeout(function() {
+            window.location.href = appStoreUrl;
+        }, 2000);
+    </script>
+</body>
+</html>
