@@ -22,13 +22,14 @@
                 clearTimeout(timeout); // Clear timeout if iframe loads successfully
             };
 
-            iframe.src = appUrl;
+            // iframe.src = appUrl;
+                        window.location.href = appUrl;
             document.body.appendChild(iframe);
         }
 
         // Function to redirect to App Store if the app can't be opened
         function redirectToAppStore() {
-            window.location.href = appUrl;
+            window.location.href = appStoreUrl;
         }
 
         // Attempt to open the app on page load
