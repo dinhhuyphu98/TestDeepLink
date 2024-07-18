@@ -11,14 +11,21 @@
         // Function to try opening the app using window.location
         function tryOpenApp() {
             var now = Date.now();
+            var hasFocus = true;
+
+            // Event listener to detect if the user has left the page (i.e., the app was opened)
+            window.onblur = function() {
+                hasFocus = false;
+            };
+
             // Attempt to open the deep link
             window.location = appUrl;
 
             // Check if the app was opened successfully after a delay
             setTimeout(function() {
                 var later = Date.now();
-                // If the time difference is less than 2 seconds, it means the deep link failed to open
-                if (later - now < 2000) {
+                // If the time difference is less than 2 seconds and the page still has focus, it means the deep link failed to open
+                if (later - now < 2000 && hasFocus) {
                     redirectToAppStore();
                 }
             }, 1500); // Check slightly before the redirect time
