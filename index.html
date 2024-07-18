@@ -1,25 +1,45 @@
-<script type="text/javascript">
-    var appUrl = "iapdeeplink://";
-    var appStoreUrl = "https://apps.apple.com/app/6473403510";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open App</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var appUrl = "iapdeeplink://";
+        var appStoreUrl = "https://apps.apple.com/app/6473403510";
 
-    // Attempt to open the app using the deep link
-    var opened = false;
+        // Attempt to open the app using the deep link
+        var opened = false;
 
-    // Function to attempt to open the app and handle the result
-    function tryOpenApp() {
-        window.location.href = appUrl;
-        setTimeout(function() {
-            if (!opened) {
-                redirectToAppStore();
-            }
-        }, 2000);
-    }
+        // Function to try opening the app and handle the result
+        function tryOpenApp() {
+            var iframe = document.createElement("iframe");
+            iframe.style.border = "none";
+            iframe.style.width = "1px";
+            iframe.style.height = "1px";
+            iframe.onload = function() {
+                opened = true;
+                document.body.removeChild(iframe);
+            };
+            iframe.src = appUrl;
+            document.body.appendChild(iframe);
 
-    // Function to redirect to App Store
-    function redirectToAppStore() {
-        window.location.href = appStoreUrl;
-    }
+            setTimeout(function() {
+                if (!opened) {
+                    redirectToAppStore();
+                }
+            }, 2000);
+        }
 
-    // Call tryOpenApp when the page loads
-    tryOpenApp();
-</script>
+        // Function to redirect to App Store
+        function redirectToAppStore() {
+            window.location.href = appStoreUrl;
+        }
+
+        // Call tryOpenApp when the page loads
+        tryOpenApp();
+    </script>
+</body>
+</html>
