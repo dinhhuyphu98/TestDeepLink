@@ -12,12 +12,17 @@
 
         // URL của App Store mà bạn muốn dẫn người dùng đến nếu không mở được app
         var appStoreUrl = "https://apps.apple.com/app/6473403510";
+        
+        // Lắng nghe sự kiện blur của window
+        window.addEventListener('blur', function() {
+            clearTimeout(appStoreTimeout);
+        });
+
+        // Mở ứng dụng
         window.location.href = appUrl;
 
-        // Mở ứng dụng bằng cách đặt src của iframe
-
         // Nếu không mở được ứng dụng sau 2 giây, dẫn người dùng đến App Store
-        setTimeout(function() {
+        var appStoreTimeout = setTimeout(function() {
             window.location.href = appStoreUrl;
         }, 2000);
     </script>
