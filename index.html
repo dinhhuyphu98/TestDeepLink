@@ -4,42 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open App</title>
-</head>
-<body>
     <script type="text/javascript">
         var appUrl = "iapdeeplink://";
         var appStoreUrl = "https://apps.apple.com/app/6473403510";
 
-        // Attempt to open the app using the deep link
-        var opened = false;
-
-        // Function to try opening the app and handle the result
+        // Function to try opening the app using an iframe
         function tryOpenApp() {
             var iframe = document.createElement("iframe");
-            iframe.style.border = "none";
-            iframe.style.width = "1px";
-            iframe.style.height = "1px";
-            iframe.onload = function() {
-                opened = true;
-                document.body.removeChild(iframe);
-            };
+            iframe.style.display = "none";
             iframe.src = appUrl;
             document.body.appendChild(iframe);
 
+            // Check if the app was opened successfully
             setTimeout(function() {
-                if (!opened) {
-                    redirectToAppStore();
-                }
-            }, 2000);
+                document.body.removeChild(iframe);
+            }, 2000); // Adjust timeout as needed
         }
 
-        // Function to redirect to App Store
+        // Function to redirect to App Store if the app can't be opened
         function redirectToAppStore() {
             window.location.href = appStoreUrl;
         }
 
-        // Call tryOpenApp when the page loads
-        tryOpenApp();
+        // Attempt to open the app on page load
+        window.onload = tryOpenApp;
     </script>
+</head>
+<body>
+    <!-- Optionally, you can add UI elements or messages here -->
 </body>
 </html>
