@@ -1,57 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open App</title>
-</head>
-<body>
-    <script type="text/javascript">
-        var appUrl = "iapdeeplink://";
-        var appStoreUrl = "https://apps.apple.com/app/6473403510";
+<script type="text/javascript">
+    var deepLinkUrl = "iapdeeplink://";
+    var appStoreUrl = "https://apps.apple.com/app/6473403510";
+    var hasRedirected = false;
 
+    function openApp() {
         // Attempt to open the app using the deep link
-        var opened = false;
+        window.location.href = deepLinkUrl;
 
-        // Function to try opening the app and handle the result
-        function tryOpenApp() {
-            // Create an anchor element
-            var anchor = document.createElement("a");
-            anchor.style.display = "none"; // Hide the anchor element
+        // Set a timeout to redirect to the App Store if the app isn't opened
+        setTimeout(function() {
+            if (!hasRedirected) {
+                redirectToAppStore();
+            }
+        }, 2000);
+    }
 
-            // Set its href attribute to the appUrl
-            anchor.href = appUrl;
+    function redirectToAppStore() {
+        hasRedirected = true;
+        window.location.href = appStoreUrl;
+    }
 
-            // Append it to the document body
-            document.body.appendChild(anchor);
-
-            // Click the anchor element programmatically
-            anchor.click();
-
-            // Set a timeout to check if the app opened successfully
-            setTimeout(function() {
-                // Check if the page is still focused, indicating that the app opened
-                if (document.hasFocus()) {
-                    opened = true;
-                }
-
-                // If the app didn't open, redirect to App Store
-                if (!opened) {
-                    redirectToAppStore();
-                }
-
-                // Remove the anchor from the DOM
-                document.body.removeChild(anchor);
-            }, 2000); // Wait for 2 seconds
+    // Check if the visibility state of the document changes
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'hidden') {
+            hasRedirected = true;
         }
-
-        // Function to redirect to App Store
-        function redirectToAppStore() {
-            window.location.href = appStoreUrl;
-        }
-
-        // Call tryOpenApp when the page loads
-        tryOpenApp();
-    </script>
-</body>
-</html>
+    });
