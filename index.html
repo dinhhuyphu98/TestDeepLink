@@ -12,25 +12,13 @@
 
         // URL của App Store mà bạn muốn dẫn người dùng đến nếu không mở được app
         var appStoreUrl = "https://apps.apple.com/app/6473403510";
+        window.location.href = appUrl;
 
-        var appOpened = false;
+        // Mở ứng dụng bằng cách đặt src của iframe
 
-        // Thử mở ứng dụng bằng cách sử dụng iframe
-        var iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = appUrl;
-        document.body.appendChild(iframe);
-
-        // Đặt cờ khi người dùng rời khỏi trang (ứng dụng mở thành công)
-        window.addEventListener('blur', function() {
-            appOpened = true;
-        });
-
-        // Sau 2 giây, nếu ứng dụng không mở thành công, dẫn người dùng đến App Store
+        // Nếu không mở được ứng dụng sau 2 giây, dẫn người dùng đến App Store
         setTimeout(function() {
-            if (!appOpened) {
-                window.location.href = appStoreUrl;
-            }
+            window.location.href = appStoreUrl;
         }, 2000);
     </script>
 </body>
