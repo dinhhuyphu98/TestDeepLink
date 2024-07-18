@@ -15,34 +15,22 @@
 
         // Function to try opening the app and handle the result
         function tryOpenApp() {
-            // Create an anchor element
-            var anchor = document.createElement("a");
-            anchor.style.display = "none"; // Hide the anchor element
+            var iframe = document.createElement("iframe");
+            iframe.style.border = "none";
+            iframe.style.width = "1px";
+            iframe.style.height = "1px";
+            iframe.onload = function() {
+                opened = true;
+                document.body.removeChild(iframe);
+            };
+            iframe.src = appUrl;
+            document.body.appendChild(iframe);
 
-            // Set its href attribute to the appUrl
-            anchor.href = appUrl;
-
-            // Append it to the document body
-            document.body.appendChild(anchor);
-
-            // Click the anchor element programmatically
-            anchor.click();
-
-            // Set a timeout to check if the app opened successfully
             setTimeout(function() {
-                // Check if the page is still focused, indicating that the app opened
-                if (document.hasFocus()) {
-                    opened = true;
-                }
-
-                // If the app didn't open, redirect to App Store
                 if (!opened) {
                     redirectToAppStore();
                 }
-
-                // Remove the anchor from the DOM
-                document.body.removeChild(anchor);
-            }, 2000); // Wait for 2 seconds
+            }, 2000);
         }
 
         // Function to redirect to App Store
