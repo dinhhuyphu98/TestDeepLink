@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open App</title>
-    <script type="text/javascript">
-        var appUrl = "iapdeeplink://";
-        var appStoreUrl = "https://apps.apple.com/app/6473403510";
-
-        // Function to try opening the app using an iframe
-        function tryOpenApp() {
-            var iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-
-            // Event listener to handle success or failure of deep link opening
-            var timeout = setTimeout(function() {
-                redirectToAppStore(); // Redirect to App Store if timeout occurs
-            }, 2000); // Adjust timeout as needed
-
-            iframe.onload = function() {
-                clearTimeout(timeout); // Clear timeout if iframe loads successfully
-            };
-
-            iframe.src = appUrl;
-                        // window.location.href = appUrl;
-            document.body.appendChild(iframe);
-        }
-
-        // Function to redirect to App Store if the app can't be opened
-        function redirectToAppStore() {
-            window.location.href = appStoreUrl;
-        }
-
-        // Attempt to open the app on page load
-        window.onload = tryOpenApp;
-    </script>
-</head>
-<body>
-    <!-- Optionally, you can add UI elements or messages here -->
-</body>
-</html>
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+    {
+      "appID": "KFCNEC27GU.com.mobile.testLink",
+      "paths": ["*"]
+    }
+    ]
+  }
+}
