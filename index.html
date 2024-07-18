@@ -12,7 +12,7 @@
         function tryOpenApp() {
             var now = Date.now();
             // Attempt to open the deep link
-            tryOpenApp();
+            window.location = appUrl;
 
             // Check if the app was opened successfully after a delay
             setTimeout(function() {
@@ -28,19 +28,17 @@
         function showAppStoreMessage() {
             document.getElementById('appStoreMessage').style.display = 'block';
         }
-        
+
         // Function to handle app store redirect button
         function redirectToAppStore() {
             window.location.href = appStoreUrl;
         }
 
-        // Show the open app message on page load
-        window.onload = function() {
-            document.getElementById('openAppMessage').style.display = 'block';
-        }
+        // Attempt to open the app on page load
+        window.onload = tryOpenApp;
     </script>
     <style>
-        #appStoreMessage, #openAppMessage {
+        #appStoreMessage {
             display: none;
         }
     </style>
