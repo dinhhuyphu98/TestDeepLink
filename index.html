@@ -10,17 +10,25 @@
         var appUrl = "iapdeeplink://";
         var appStoreUrl = "https://apps.apple.com/app/6473403510";
 
-        // Hàm kiểm tra và chuyển hướng sau 3 giây
+        // Hàm kiểm tra và chuyển hướng
         function checkAppAndRedirect() {
             var startTime = Date.now();
 
             // Thử mở deeplink
             window.location.href = appUrl;
 
-            // Sau 3 giây, kiểm tra kết quả và chuyển hướng
+            // Kiểm tra nếu trang web mất focus (blur) sau khi cố gắng mở deeplink
+            document.addEventListener("visibilitychange", function() {
+                if (document.visibilityState === 'hidden') {
+                    // Trang web đã blur, chuyển hướng đến App Store
+                    window.location.href = appStoreUrl;
+                }
+            });
+
+            // Thiết lập timeout 3 giây để chuyển hướng nếu không mở được deeplink
             setTimeout(function() {
-                // Kiểm tra nếu đã chuyển hướng
-                if (document.hidden || (Date.now() - startTime < 3000)) {
+                // Kiểm tra nếu cửa sổ không blur sau 3 giây, chuyển hướng đến App Store
+                if (document.visibilityState !== 'hidden') {
                     window.location.href = appStoreUrl;
                 }
             }, 3000);
