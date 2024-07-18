@@ -12,13 +12,18 @@
         function tryOpenApp() {
             var iframe = document.createElement("iframe");
             iframe.style.display = "none";
+
+            // Event listener to handle success or failure of deep link opening
+            var timeout = setTimeout(function() {
+                redirectToAppStore(); // Redirect to App Store if timeout occurs
+            }, 2000); // Adjust timeout as needed
+
+            iframe.onload = function() {
+                clearTimeout(timeout); // Clear timeout if iframe loads successfully
+            };
+
             iframe.src = appUrl;
             document.body.appendChild(iframe);
-
-            // Check if the app was opened successfully
-            setTimeout(function() {
-                document.body.removeChild(iframe);
-            }, 2000); // Adjust timeout as needed
         }
 
         // Function to redirect to App Store if the app can't be opened
