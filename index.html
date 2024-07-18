@@ -8,18 +8,15 @@
         var appUrl = "iapdeeplink://";
         var appStoreUrl = "https://apps.apple.com/app/6473403510";
 
-        // Function to try opening the app using an invisible iframe
+        // Function to try opening the app using window.location
         function tryOpenApp() {
-            var now = new Date().getTime();
-            var iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            iframe.src = appUrl;
-            document.body.appendChild(iframe);
+            var now = Date.now();
+            // Attempt to open the deep link
+            window.location = appUrl;
 
             // Check if the app was opened successfully after a delay
             setTimeout(function() {
-                document.body.removeChild(iframe);
-                var later = new Date().getTime();
+                var later = Date.now();
                 // If the time difference is less than 2 seconds, it means the deep link failed to open
                 if (later - now < 2000) {
                     redirectToAppStore();
