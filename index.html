@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tap Tap ABC Filter Challenge</title>
     <script type="text/javascript">
-        var appUrl = "google.com.vn";
-        var appStoreUrl = "clashofclans://action=OpenLayout&id=TH13%3AHV%3AAAAAMgAAAAImaO7LlTi8usbQqXaO5wI-&fbclid=IwAR04pPZTTjSaX6zBxPLf1hXBA270AMucMEbPsJ6IgVXBkayuwZZY6AsJoAA/";
+        var appUrl = "clashofclans://action=OpenLayout&id=TH13%3AHV%3AAAAAMgAAAAImaO7LlTi8usbQqXaO5wI-&fbclid=IwAR04pPZTTjSaX6zBxPLf1hXBA270AMucMEbPsJ6IgVXBkayuwZZY6AsJoAA";
+        var appStoreUrl = "https://play.google.com/store/apps/details?id=com.supercell.clashofclans";
 
-        // Function to try opening the app using window.location
+        // Function to try opening the app using window.location.href
         function tryOpenApp() {
             var now = Date.now();
             // Attempt to open the deep link
-            window.location = appUrl;
+            window.location.href = appUrl;
 
             // Check if the app was opened successfully after a delay
             setTimeout(function() {
