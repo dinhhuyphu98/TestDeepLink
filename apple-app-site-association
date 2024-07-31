@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "T852J6UR43.com.aicover.aimusicsonggenerator",
+        "paths": [ "/path/*" ]
+      }
+    ]
+  }
+}
